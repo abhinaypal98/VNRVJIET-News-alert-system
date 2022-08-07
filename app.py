@@ -10,7 +10,7 @@ now = datetime.now(tz=gettz('Asia/Kolkata'))
 current_time = now.strftime("%H:%M:%S")
 today = date.today()
 current_day = today.strftime("%d/%m/%y")
-User_name =os.getenv("User_name")  # Give gmail id through which you are sending emails
+User_name =os.getenv("User_name")  # Sender gmail id 
 Password = os.getenv("Password")   # unique password for the user
 
 # Making a Request for vnrvjiet news site and extracting only news from site normal news
