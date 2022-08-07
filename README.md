@@ -8,3 +8,5 @@ secure-smtplib
 requests
 
 bs4
+
+Note : Deploy this code in a server I deployed this in  https://wayscript.com and triggered this code to run on daily bases 
