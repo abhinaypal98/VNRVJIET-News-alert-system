@@ -1,4 +1,5 @@
 # Vnr news updates through email at scheduled time 
+# Sender email should be google account(<user>@gmail.com)
 import smtplib
 from email.message import EmailMessage
 import os
@@ -9,9 +10,10 @@ now = datetime.now(tz=gettz('Asia/Kolkata'))
 current_time = now.strftime("%H:%M:%S")
 today = date.today()
 current_day = today.strftime("%d/%m/%y")
-User_name =os.getenv("User_name")
-Password = os.getenv("Password")
+User_name =os.getenv("User_name")  # Give gmail id through which you are sending emails
+Password = os.getenv("Password")   # unique password for the user
 
+# Making a Request for vnrvjiet news site and extracting only news from site normal news
 def Request_news():
     import requests
     from bs4 import BeautifulSoup as BS
@@ -32,6 +34,7 @@ def Request_news():
         data.append((link,img_link,news))
     return data
 
+# Making a Request for vnrvjiet news site and extracting only news from site exam news
 def EXAM_NEWS():
     import requests
     from bs4 import BeautifulSoup as BS
@@ -55,11 +58,11 @@ def EXAM_NEWS():
     return data
     
 
-# construct email
+# construct email format
 email = EmailMessage()
 email['Subject'] = f' VNRVJIET NEWS - Date : {current_day}   Time : {current_time}'
 email['From'] = User_name
-email['To'] = "braviteja2910@gmail.com"
+email['To'] = "braviteja2910@gmail.com"   # sender email, use list if there are more than one emails. Any email id is accepted
 
 
 contents ="<body><h1> VNRVJIET LATEST NEWS </h1><br>"
@@ -81,10 +84,12 @@ for x,y,z in data:
 
 contents+="</body>"
 
+
 email.set_content(contents, subtype='html')
 
 
 # Send the message via local SMTP server.
+
 with smtplib.SMTP('smtp.gmail.com',587) as s:
     s.starttls()
     s.login(User_name,Password)
